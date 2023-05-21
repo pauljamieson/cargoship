@@ -1,0 +1,24 @@
+services:
+  web:
+    build: 
+      context: ./app
+      dockerfile: Dockerfile.prd
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    expose:
+      - 8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - static_volume:/app/web/staticfiles
+    env_file:
+      - ./.env.prd
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes:
+      - static_volume:/app/web/staticfiles
+    depends_on:
+      - web
+
+volumes:
+   static_volume:

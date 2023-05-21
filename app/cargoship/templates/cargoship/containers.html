@@ -1,0 +1,60 @@
+{% extends "cargoship/base.html" %} {% block content %}
+<div class="container-list">
+  {% for container in containers %}
+  <div
+    class="container-card"
+    onclick='handleClickCard("{{ forloop.counter }}")'
+  >
+    <div class="card-row">
+      <div>
+        <div class="card-name">{{container.name}}</div>
+        <div class="card-info">{{container.short_id}}</div>
+        <div class="card-info">{{container.image}}</div>
+      </div>
+      <div class="card-status {{container.status}}"></div>
+    </div>
+  </div>
+  {% endfor %}
+  <dialog>
+    <h2></h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="submit" name="stop" value="Stop" />
+      <input type="submit" name="restart" value="Restart" />
+      <input type="submit" name="start" value="Start" />
+      <input type="hidden" name="id" id="container_id"/>
+      <button onclick="handleClose(event)">Close</button>
+    </form>
+  </dialog>
+</div>
+<script>
+  const modal = document.querySelector("dialog");
+  const modalTitle = document.querySelector("dialog>h2");
+  const containerId = document.getElementById("container_id")
+
+  const containers = strToJSON("{{ containers }}");
+
+  function strToJSON(str) {
+    return JSON.parse(
+      str
+        .replace(new RegExp("&" + "#" + "x27;", "g"), '"')
+        .replaceAll("None", '"None"')
+        .replaceAll("True", '"true"')
+        .replaceAll("False", '"false"')
+        .replace(new RegExp("&" + "lt;", "g"), '"<')
+        .replace(new RegExp("&" + "gt;", "g"), '>"')
+    );
+  }
+
+  function handleClose(e) {
+    e.preventDefault();
+    modal.close();
+  }
+
+  function handleClickCard(e) {
+    modal.showModal();
+    modalTitle.innerHTML = containers[e - 1].name;
+    containerId.value  = containers[e - 1].id;
+  }
+</script>
+{% endblock content %}

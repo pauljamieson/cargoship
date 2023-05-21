@@ -1,0 +1,135 @@
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  --color-pri: #90c053;
+  --color-sec: #5390c0;
+  --color-ter: #c05390;
+  --color-err: #ee0202;
+  --text-pri: #000;
+  --active: #c05359;
+
+  --running: #11a811;
+  --exited: #dd2828;
+}
+
+body {
+  margin: 0;
+}
+
+.appbar {
+  background-color: var(--color-pri);
+  height: 50px;
+  width: 100%;
+  color: var(--text-pri);
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  justify-content: center;
+  border-bottom: 1px solid var(--active);
+}
+
+.appbar > div {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.title {
+  font-size: 1.2rem;
+}
+
+.nav-links {
+  justify-content: end;
+}
+
+.nav-link {
+  text-decoration: none;
+  position: relative;
+  margin: 0 2px;
+}
+
+.nav-link.active {
+  width: 100%;
+  border-bottom: solid 3px var(--active);
+}
+
+.content-wrapper {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+form button, form input[type=submit] {
+  background: var(--color-sec);
+  border: 1px solid var(--color-sec);
+  padding: 5px;
+}
+
+form button:hover, form input[type=submit]:hover {
+  background-color: var(--color-pri); 
+}
+
+form button:active, form input[type=submit]:active   {
+  background-color: var(--color-sec);
+}
+
+.container-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 2px;
+  width: 100%;
+}
+
+.container-card {
+  border: 1px solid var(--color-sec);
+  border-radius: 10px;
+  padding: 5px;
+  max-width: 800px;
+}
+
+.container-card:hover {
+  background-color: var(--color-sec);
+}
+
+.card-info {
+  font-size: 0.75rem;
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-status {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 25px;
+  height:25px;
+}
+
+.card-status.running {
+  background-color: var(--running);
+}
+
+.card-status.exited {
+  background-color: var(--exited);
+}
