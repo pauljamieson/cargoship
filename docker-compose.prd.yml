@@ -15,10 +15,13 @@ services:
     build: ./nginx
     ports:
       - 80:80
+      - 443:443
     volumes:
       - static_volume:/app/web/staticfiles
     depends_on:
       - web
+    env_file:
+      - ./.env.prd
 
 volumes:
    static_volume:

@@ -127,3 +127,5 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_URL = "/login"
+
+CSRF_TRUSTED_ORIGINS = [f'https://{os.environ.get("HOST_URL", default="localhost")}']
